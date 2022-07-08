@@ -16,9 +16,12 @@ class App extends Component {
   };
 
   addContact = newContact => {
-    const contactName = this.state.contacts.map(contact => contact.name);
+    const normalizedContactsName = this.state.contacts.map(contact =>
+      contact.name.toLowerCase()
+    );
+    const normalizedNewContact = newContact.name.toLowerCase();
 
-    if (contactName.includes(newContact.name)) {
+    if (normalizedContactsName.includes(normalizedNewContact)) {
       alert(`${newContact.name} is already in contacts.`);
     } else {
       this.setState(({ contacts }) => ({
@@ -54,7 +57,7 @@ class App extends Component {
           <ContactForm addContact={this.addContact} />
 
           <h2>Contacts</h2>
-          <Filter onChange={this.handleInputChenge} />
+          <Filter value={this.state.filter} onChange={this.handleInputChenge} />
           <ContactList contacts={filtered} onDelete={this.deleteContact} />
         </div>
       </>

@@ -1,15 +1,14 @@
 import PropTypes from 'prop-types';
 
-const ContactListItem = ({ contacts, onDelete }) =>
-  contacts.map(({ id, name, number }) => (
-    <li key={id}>
-      {name}: {number}
-      <button onClick={() => onDelete(id)}>Delete</button>
-    </li>
-  ));
+const ContactListItem = ({ contact, onDelete }) => (
+  <li>
+    {contact.name}: {contact.number}
+    <button onClick={() => onDelete(contact.id)}>Delete</button>
+  </li>
+);
 
 ContactListItem.propTypes = {
-  contacts: PropTypes.array.isRequired,
+  contact: PropTypes.objectOf(PropTypes.string).isRequired,
   onDelete: PropTypes.func.isRequired,
 };
 
